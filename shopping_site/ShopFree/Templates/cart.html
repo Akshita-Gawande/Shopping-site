@@ -1,0 +1,74 @@
+<html>
+<head>
+	<title> ShopFree</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.2/css/fileinput-rtl.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+	<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+
+			<a href="products"><img src="http://www.rednewswire.com/wp-content/uploads/2015/11/Flipkart-Logo-Red-Newswire.png" width="150px" height="50px" border="0" alt=""></a>
+
+			<form method="POST" action='login' style='float:right;'>
+				{% csrf_token %}
+				<input type="submit" class="btn btn-danger btn-lg" name="logout" id="btn_logout" value="Logout">
+			</form>
+			<a href="cart"><img src="http://pngimg.com/uploads/shopping_cart/shopping_cart_PNG65.png" height="50px" style="float:right;"></a>
+			<div style="color:red; font-size: 26; float:right;">{{ cart_count }}<div>
+			
+
+		</div>
+	</nav>
+
+	<div >
+		<form method="POST">
+				{% csrf_token %}
+			<input type="hidden" name="buy" value="buy">
+			
+		{% if products|length > 0 %}
+			<label> Total Amount: {{ total_amount }} Rs</label>
+			<input type="submit" class="btn btn-success btn-lg" id="btn_buy" value="Buy">
+		{% else %}
+		<label style='float:left;'>No Items in your cart</label>
+		{% endif %}
+		</form>
+	</div>
+	
+	{% load static %}
+	<table class="table">
+	{% for product in products %}
+	<tr>
+		<td>
+	<img src='{{ product.img_url }}' height='200px' width='auto'>
+		</td>
+		<td>
+	<h2>{{ product.name }}</h2><br>
+	<strike>{{ product.price }} Rs</strike><br>
+	{{ product.discount }} Rs
+		</td>
+		<td>
+		<form method="POST">
+			{% csrf_token %}
+			<input type="hidden" name="remove" value="{{ product.product_id }}">
+			
+			<input type="submit" class="btn btn-primary" id="btn_add_cart" value="Remove">
+		</form>
+	</td>
+	</tr>
+	{% endfor %}
+</table>
+
+<script>
+
+
+</script>
+</body>
+</html>
