@@ -30,4 +30,4 @@ a2z e-commerce services want to launch its portal with a new look and feel. The 
 
 4. Finally, open the url http://127.0.0.1:8000/shopfree/login
 
-
+ 
