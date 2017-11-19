@@ -20,5 +20,4 @@ urlpatterns = [
 url(r'^shopfree/', include('ShopFree.urls')),
     url(r'^admin/', admin.site.urls)
     
-]
- 
+] 
